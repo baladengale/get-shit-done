@@ -67,6 +67,7 @@ const hasCopilot = args.includes('--copilot');
 const hasAntigravity = args.includes('--antigravity');
 const hasCursor = args.includes('--cursor');
 const hasWindsurf = args.includes('--windsurf');
+const hasSdk = args.includes('--sdk');
 const hasBoth = args.includes('--both'); // Legacy flag, keeps working
 const hasAll = args.includes('--all');
 const hasUninstall = args.includes('--uninstall') || args.includes('-u');
@@ -327,7 +328,7 @@ if (hasUninstall) {
 
 // Show help if requested
 if (hasHelp) {
-  console.log(`  ${yellow}Usage:${reset} npx get-shit-done-cc [options]\n\n  ${yellow}Options:${reset}\n    ${cyan}-g, --global${reset}              Install globally (to config directory)\n    ${cyan}-l, --local${reset}               Install locally (to current directory)\n    ${cyan}--claude${reset}                  Install for Claude Code only\n    ${cyan}--opencode${reset}                Install for OpenCode only\n    ${cyan}--gemini${reset}                  Install for Gemini only\n    ${cyan}--codex${reset}                   Install for Codex only\n    ${cyan}--copilot${reset}                 Install for Copilot only\n    ${cyan}--antigravity${reset}             Install for Antigravity only\n    ${cyan}--cursor${reset}                  Install for Cursor only\n    ${cyan}--windsurf${reset}                Install for Windsurf only\n    ${cyan}--all${reset}                     Install for all runtimes\n    ${cyan}-u, --uninstall${reset}           Uninstall GSD (remove all GSD files)\n    ${cyan}-c, --config-dir <path>${reset}   Specify custom config directory\n    ${cyan}-h, --help${reset}                Show this help message\n    ${cyan}--force-statusline${reset}        Replace existing statusline config\n\n  ${yellow}Examples:${reset}\n    ${dim}# Interactive install (prompts for runtime and location)${reset}\n    npx get-shit-done-cc\n\n    ${dim}# Install for Claude Code globally${reset}\n    npx get-shit-done-cc --claude --global\n\n    ${dim}# Install for Gemini globally${reset}\n    npx get-shit-done-cc --gemini --global\n\n    ${dim}# Install for Codex globally${reset}\n    npx get-shit-done-cc --codex --global\n\n    ${dim}# Install for Copilot globally${reset}\n    npx get-shit-done-cc --copilot --global\n\n    ${dim}# Install for Copilot locally${reset}\n    npx get-shit-done-cc --copilot --local\n\n    ${dim}# Install for Antigravity globally${reset}\n    npx get-shit-done-cc --antigravity --global\n\n    ${dim}# Install for Antigravity locally${reset}\n    npx get-shit-done-cc --antigravity --local\n\n    ${dim}# Install for Cursor globally${reset}\n    npx get-shit-done-cc --cursor --global\n\n    ${dim}# Install for Cursor locally${reset}\n    npx get-shit-done-cc --cursor --local\n\n    ${dim}# Install for Windsurf globally${reset}\n    npx get-shit-done-cc --windsurf --global\n\n    ${dim}# Install for Windsurf locally${reset}\n    npx get-shit-done-cc --windsurf --local\n\n    ${dim}# Install for all runtimes globally${reset}\n    npx get-shit-done-cc --all --global\n\n    ${dim}# Install to custom config directory${reset}\n    npx get-shit-done-cc --codex --global --config-dir ~/.codex-work\n\n    ${dim}# Install to current project only${reset}\n    npx get-shit-done-cc --claude --local\n\n    ${dim}# Uninstall GSD from Cursor globally${reset}\n    npx get-shit-done-cc --cursor --global --uninstall\n\n  ${yellow}Notes:${reset}\n    The --config-dir option is useful when you have multiple configurations.\n    It takes priority over CLAUDE_CONFIG_DIR / GEMINI_CONFIG_DIR / CODEX_HOME / COPILOT_CONFIG_DIR / ANTIGRAVITY_CONFIG_DIR / CURSOR_CONFIG_DIR / WINDSURF_CONFIG_DIR environment variables.\n`);
+  console.log(`  ${yellow}Usage:${reset} npx get-shit-done-cc [options]\n\n  ${yellow}Options:${reset}\n    ${cyan}-g, --global${reset}              Install globally (to config directory)\n    ${cyan}-l, --local${reset}               Install locally (to current directory)\n    ${cyan}--claude${reset}                  Install for Claude Code only\n    ${cyan}--opencode${reset}                Install for OpenCode only\n    ${cyan}--gemini${reset}                  Install for Gemini only\n    ${cyan}--codex${reset}                   Install for Codex only\n    ${cyan}--copilot${reset}                 Install for Copilot only\n    ${cyan}--antigravity${reset}             Install for Antigravity only\n    ${cyan}--cursor${reset}                  Install for Cursor only\n    ${cyan}--windsurf${reset}                Install for Windsurf only\n    ${cyan}--all${reset}                     Install for all runtimes\n    ${cyan}--sdk${reset}                     Also install GSD SDK CLI (gsd-sdk)\n    ${cyan}-u, --uninstall${reset}           Uninstall GSD (remove all GSD files)\n    ${cyan}-c, --config-dir <path>${reset}   Specify custom config directory\n    ${cyan}-h, --help${reset}                Show this help message\n    ${cyan}--force-statusline${reset}        Replace existing statusline config\n\n  ${yellow}Examples:${reset}\n    ${dim}# Interactive install (prompts for runtime and location)${reset}\n    npx get-shit-done-cc\n\n    ${dim}# Install for Claude Code globally${reset}\n    npx get-shit-done-cc --claude --global\n\n    ${dim}# Install for Gemini globally${reset}\n    npx get-shit-done-cc --gemini --global\n\n    ${dim}# Install for Codex globally${reset}\n    npx get-shit-done-cc --codex --global\n\n    ${dim}# Install for Copilot globally${reset}\n    npx get-shit-done-cc --copilot --global\n\n    ${dim}# Install for Copilot locally${reset}\n    npx get-shit-done-cc --copilot --local\n\n    ${dim}# Install for Antigravity globally${reset}\n    npx get-shit-done-cc --antigravity --global\n\n    ${dim}# Install for Antigravity locally${reset}\n    npx get-shit-done-cc --antigravity --local\n\n    ${dim}# Install for Cursor globally${reset}\n    npx get-shit-done-cc --cursor --global\n\n    ${dim}# Install for Cursor locally${reset}\n    npx get-shit-done-cc --cursor --local\n\n    ${dim}# Install for Windsurf globally${reset}\n    npx get-shit-done-cc --windsurf --global\n\n    ${dim}# Install for Windsurf locally${reset}\n    npx get-shit-done-cc --windsurf --local\n\n    ${dim}# Install for all runtimes globally${reset}\n    npx get-shit-done-cc --all --global\n\n    ${dim}# Install to custom config directory${reset}\n    npx get-shit-done-cc --codex --global --config-dir ~/.codex-work\n\n    ${dim}# Install to current project only${reset}\n    npx get-shit-done-cc --claude --local\n\n    ${dim}# Uninstall GSD from Cursor globally${reset}\n    npx get-shit-done-cc --cursor --global --uninstall\n\n  ${yellow}Notes:${reset}\n    The --config-dir option is useful when you have multiple configurations.\n    It takes priority over CLAUDE_CONFIG_DIR / GEMINI_CONFIG_DIR / CODEX_HOME / COPILOT_CONFIG_DIR / ANTIGRAVITY_CONFIG_DIR / CURSOR_CONFIG_DIR / WINDSURF_CONFIG_DIR environment variables.\n`);
   process.exit(0);
 }
 
@@ -2050,6 +2051,84 @@ function mergeCodexConfig(configPath, gsdBlock) {
   fs.writeFileSync(configPath, content);
 }
 
+/**
+ * Repair config.toml files corrupted by pre-#1346 GSD installs.
+ * Non-boolean keys (e.g. model = "gpt-5.3-codex") that ended up under [features]
+ * are relocated before the [features] header so Codex can parse them correctly.
+ * Returns the content unchanged if no trapped keys are found.
+ */
+function repairTrappedFeaturesKeys(content) {
+  const eol = detectLineEnding(content);
+  const lineRecords = getTomlLineRecords(content);
+  const featuresSection = getTomlTableSections(content)
+    .find((section) => !section.array && section.path === 'features');
+
+  if (!featuresSection) {
+    return content;
+  }
+
+  // Find non-boolean key-value lines inside [features] that don't belong there.
+  // Boolean keys (codex_hooks, multi_agent, etc.) are legitimate feature flags.
+  const trappedLines = lineRecords.filter((record) => {
+    if (record.tableHeader || record.startsInMultilineString) return false;
+    if (record.tablePath !== 'features') return false;
+    if (record.start < featuresSection.headerEnd) return false;
+    if (record.end + record.eol.length > featuresSection.end) return false;
+    if (!record.keySegments || record.keySegments.length === 0) return false;
+
+    // Check if the value is a boolean — if so, it belongs under [features]
+    const equalsIndex = findTomlAssignmentEquals(record.text);
+    if (equalsIndex === -1) return false;
+    const commentStart = findTomlCommentStart(record.text);
+    const valueText = record.text
+      .slice(equalsIndex + 1, commentStart === -1 ? record.text.length : commentStart)
+      .trim();
+    if (valueText === 'true' || valueText === 'false') return false;
+
+    // Skip values that start a multiline string — they may legitimately live
+    // under [features] and spanning multiple lines makes relocation unsafe.
+    if (valueText.startsWith("'''") || valueText.startsWith('"""')) return false;
+
+    // Non-boolean value — this key is trapped
+    return true;
+  });
+
+  if (trappedLines.length === 0) {
+    return content;
+  }
+
+  // Build the relocated text block from trapped lines
+  const relocatedText = trappedLines.map((r) => r.text).join(eol) + eol;
+
+  // Remove trapped lines from their current positions (with their EOLs)
+  const removalRanges = trappedLines.map((r) => ({
+    start: r.start,
+    end: r.end + r.eol.length,
+  }));
+  let cleaned = removeContentRanges(content, removalRanges);
+
+  // Collapse any runs of 3+ blank lines left behind
+  cleaned = collapseTomlBlankLines(cleaned);
+
+  // Re-locate the [features] header in the cleaned content
+  const cleanedRecords = getTomlLineRecords(cleaned);
+  const cleanedFeaturesHeader = cleanedRecords.find(
+    (r) => r.tableHeader && r.tableHeader.path === 'features' && !r.tableHeader.array
+  );
+
+  if (!cleanedFeaturesHeader) {
+    return cleaned;
+  }
+
+  // Insert relocated keys before [features]
+  const before = cleaned.slice(0, cleanedFeaturesHeader.start);
+  const after = cleaned.slice(cleanedFeaturesHeader.start);
+  const needsGap = before.length > 0 && !before.endsWith(eol + eol);
+  const trailingGap = after.length > 0 && !relocatedText.endsWith(eol + eol) ? eol : '';
+
+  return before + (needsGap ? eol : '') + relocatedText + trailingGap + after;
+}
+
 function ensureCodexHooksFeature(configContent) {
   const eol = detectLineEnding(configContent);
   const lineRecords = getTomlLineRecords(configContent);
@@ -2071,8 +2150,9 @@ function ensureCodexHooksFeature(configContent) {
       );
 
     if (sectionLines.length > 0) {
+      const rewritten = rewriteTomlKeyLines(configContent, sectionLines, 'codex_hooks');
       return {
-        content: rewriteTomlKeyLines(configContent, sectionLines, 'codex_hooks'),
+        content: repairTrappedFeaturesKeys(rewritten),
         ownership: null,
       };
     }
@@ -2081,8 +2161,9 @@ function ensureCodexHooksFeature(configContent) {
     const needsSeparator = sectionBody.length > 0 && !sectionBody.endsWith('\n') && !sectionBody.endsWith('\r\n');
     const insertPrefix = sectionBody.length === 0 && featuresSection.headerEnd === configContent.length ? eol : '';
     const insertText = `${insertPrefix}${needsSeparator ? eol : ''}codex_hooks = true${eol}`;
+    const merged = configContent.slice(0, featuresSection.end) + insertText + configContent.slice(featuresSection.end);
     return {
-      content: configContent.slice(0, featuresSection.end) + insertText + configContent.slice(featuresSection.end),
+      content: repairTrappedFeaturesKeys(merged),
       ownership: 'section',
     };
   }
@@ -4610,6 +4691,71 @@ function handleStatusline(settings, isInteractive, callback) {
 }
 
 /**
+ * Install the GSD SDK globally via npm.
+ * @returns {boolean} true if install succeeded
+ */
+function installSdk() {
+  const sdkVersion = pkg.version;
+  const sdkPkg = `@gsd-build/sdk@${sdkVersion}`;
+  console.log(`\n  ${cyan}Installing GSD SDK...${reset}`);
+  console.log(`  ${dim}npm install -g ${sdkPkg}${reset}\n`);
+  try {
+    require('child_process').execSync(`npm install -g ${sdkPkg}`, { stdio: 'inherit' });
+    console.log(`\n  ${green}✓${reset} GSD SDK installed (${cyan}gsd-sdk${reset} command available)`);
+    return true;
+  } catch (e) {
+    console.log(`\n  ${yellow}⚠${reset} SDK install failed: ${e.message}`);
+    console.log(`  ${dim}You can install it manually: npm install -g ${sdkPkg}${reset}`);
+    return false;
+  }
+}
+
+/**
+ * Prompt the user to optionally install the GSD SDK.
+ * Called after runtime installation completes.
+ * @param {Function} callback - called with true/false
+ */
+function promptSdk(callback) {
+  if (!process.stdin.isTTY) {
+    callback(false);
+    return;
+  }
+
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+  let answered = false;
+
+  rl.on('close', () => {
+    if (!answered) {
+      answered = true;
+      callback(false);
+    }
+  });
+
+  console.log(`
+  ${yellow}Also install the GSD SDK?${reset}
+
+  The SDK provides a standalone CLI for autonomous execution:
+    ${dim}gsd-sdk init @prd.md${reset}    Bootstrap a project from a PRD
+    ${dim}gsd-sdk auto${reset}            Run full autonomous lifecycle
+    ${dim}gsd-sdk run "prompt"${reset}    Execute a milestone from text
+
+  ${cyan}1${reset}) No
+  ${cyan}2${reset}) Yes ${dim}(runs: npm install -g @gsd-build/sdk)${reset}
+`);
+
+  rl.question(`  Choice ${dim}[1]${reset}: `, (answer) => {
+    answered = true;
+    rl.close();
+    const choice = answer.trim() || '1';
+    callback(choice === '2');
+  });
+}
+
+/**
  * Prompt for runtime selection
  */
 function promptRuntime(callback) {
@@ -4738,16 +4884,32 @@ function installAllRuntimes(runtimes, isGlobal, isInteractive) {
   const primaryStatuslineResult = results.find(r => statuslineRuntimes.includes(r.runtime));
 
   const finalize = (shouldInstallStatusline) => {
-    for (const result of results) {
-      const useStatusline = statuslineRuntimes.includes(result.runtime) && shouldInstallStatusline;
-      finishInstall(
-        result.settingsPath,
-        result.settings,
-        result.statuslineCommand,
-        useStatusline,
-        result.runtime,
-        isGlobal
-      );
+    // Handle SDK installation before printing final summaries
+    const printSummaries = () => {
+      for (const result of results) {
+        const useStatusline = statuslineRuntimes.includes(result.runtime) && shouldInstallStatusline;
+        finishInstall(
+          result.settingsPath,
+          result.settings,
+          result.statuslineCommand,
+          useStatusline,
+          result.runtime,
+          isGlobal
+        );
+      }
+    };
+
+    if (hasSdk) {
+      // --sdk flag: install without prompting
+      installSdk();
+      printSummaries();
+    } else if (isInteractive) {
+      promptSdk((wantsSdk) => {
+        if (wantsSdk) installSdk();
+        printSummaries();
+      });
+    } else {
+      printSummaries();
     }
   };
 
@@ -4802,6 +4964,8 @@ if (process.env.GSD_TEST_MODE) {
     writeManifest,
     reportLocalPatches,
     validateHookFields,
+    installSdk,
+    promptSdk,
   };
 } else {
 
